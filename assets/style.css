@@ -1,0 +1,617 @@
+/* Crimson Changes: the timeline, file cards, diffs and the commit box */
+
+:root {
+	--card-radius: 12px;
+	--chip-radius: 6px;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The timeline */
+
+/* Rows keep clear of the list's edges and of the scrollbar, which floats over the right side, and a row's icon keeps
+ * the same gap from its highlight's left edge as from its top and bottom */
+.timeline > row {
+	padding: 0 0 0 var(--spacing-normal);
+	margin: 0 var(--spacing-normal) 0 var(--spacing-small);
+	border-radius: 10px;
+	transition: background-color 180ms var(--ease-out);
+}
+
+.timeline-row {
+	min-height: 54px;
+	padding-right: var(--spacing-normal);
+}
+
+.timeline-row > * {
+	margin-left: 0;
+}
+
+/* The graph and the icon column end at the same edge, where every row's text starts */
+.timeline-row > drawingarea,
+.timeline-row > .row-marker {
+	margin-right: var(--spacing-tight);
+}
+
+.timeline-row.heading {
+	min-height: 34px;
+}
+
+/* Small headings over groups, such as a day in the history or the cards of the staged files */
+.timeline-heading,
+.group-heading {
+	font-size: 0.8em;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	opacity: 0.55;
+	margin-top: var(--spacing-snug);
+}
+
+.row-title {
+	font-weight: 600;
+}
+
+/* Only the words of a details line are quiet, so the line counts keep their full colour */
+.row-details {
+	font-size: 0.86em;
+}
+
+label.row-details,
+.row-details .count-text,
+.section-count .count-text {
+	opacity: 0.65;
+}
+
+.timeline-row.now {
+	min-height: 62px;
+}
+
+.row-icon {
+	border-radius: 9999px;
+	background: alpha(currentColor, 0.08);
+	color: alpha(currentColor, 0.8);
+}
+
+.timeline-row.now.pending .row-icon {
+	background: alpha(var(--crimson), 0.18);
+	color: var(--crimson);
+	animation: breathe 2.4s ease-in-out infinite;
+}
+
+.timeline-row.now.clean .row-icon {
+	background: alpha(var(--added), 0.16);
+	color: var(--added);
+}
+
+.timeline-row.now.busy .row-icon {
+	background: alpha(var(--warning-color), 0.2);
+	color: var(--warning-color);
+}
+
+@keyframes breathe {
+	0%, 100% {
+		box-shadow: 0 0 0 0 alpha(var(--crimson), 0.35);
+	}
+	50% {
+		box-shadow: 0 0 0 5px alpha(var(--crimson), 0);
+	}
+}
+
+/* Every pill, for branches, tags, kinds of change and line counts, has one shape and only its colour differs */
+
+.chip,
+.kind-badge,
+.line-counts {
+	min-height: 18px;
+	font-size: 0.75em;
+	font-weight: 700;
+	padding: 1px 7px;
+	border-radius: var(--chip-radius);
+	background: alpha(currentColor, 0.1);
+}
+
+.chip.branch {
+	background: alpha(var(--accent-bg-color), 0.18);
+	color: var(--accent-color);
+}
+
+.chip.branch.current {
+	background: var(--accent-bg-color);
+	color: var(--accent-fg-color);
+}
+
+.chip.remote {
+	background: none;
+	box-shadow: inset 0 0 0 1px alpha(currentColor, 0.25);
+	opacity: 0.8;
+}
+
+.chip.tag {
+	background: alpha(var(--warning-color), 0.2);
+	color: var(--warning-color);
+}
+
+.chip.merge {
+	background: alpha(var(--merge), 0.2);
+	color: mix(var(--merge), white, 0.25);
+}
+
+.chip.signed {
+	background: alpha(var(--added), 0.18);
+	color: var(--added);
+}
+
+.chip.bad {
+	background: alpha(var(--removed), 0.2);
+	color: var(--removed);
+}
+
+/* The branch button in the side panel's header */
+
+.branch-button {
+	padding: 2px 12px;
+}
+
+.branch-button > button {
+	background: alpha(currentColor, 0.06);
+	border-radius: 10px;
+}
+
+.repository-name {
+	font-weight: 800;
+}
+
+.branch-line {
+	font-size: 0.85em;
+	opacity: 0.75;
+}
+
+.sync-state {
+	font-weight: 700;
+	color: var(--accent-color);
+}
+
+.branch-popover {
+	margin: var(--spacing-tight);
+}
+
+.branch-row {
+	padding: var(--spacing-tight) var(--spacing-small);
+}
+
+/* The folds' arrows line up with the branch icons */
+.branch-expander title {
+	font-weight: 400;
+	opacity: 0.75;
+	padding: var(--spacing-small) var(--spacing-small) var(--spacing-small) var(--spacing-roomy);
+}
+
+.sync-count {
+	font-weight: 800;
+	font-feature-settings: "tnum";
+}
+
+.branch-arrow {
+	-gtk-icon-size: 12px;
+	opacity: 0.7;
+}
+
+.spinning {
+	animation: spin 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Pages */
+
+.page-content {
+	padding: var(--spacing-large) var(--spacing-huge) var(--spacing-huge);
+}
+
+/* Parts of a page sit apart by the large gap, while a heading sits on its list by the normal one */
+.page-part {
+	margin-bottom: var(--spacing-large);
+}
+
+/* Headings start on the cards' edge */
+.section-heading {
+	padding: 0;
+}
+
+.section-title {
+	font-weight: 800;
+	font-size: 1.05em;
+}
+
+.section-count {
+	margin-left: var(--spacing-tight);
+}
+
+statuspage.illustrated image.icon {
+	-gtk-icon-size: 160px;
+	margin-bottom: var(--spacing-large);
+	animation: pop-in 420ms var(--ease-out);
+}
+
+.operation-banner {
+	padding: var(--spacing-normal) var(--spacing-roomy);
+	border-radius: var(--card-radius);
+	background: alpha(var(--warning-color), 0.12);
+	box-shadow: inset 0 0 0 1px alpha(var(--warning-color), 0.3);
+}
+
+.operation-banner > image {
+	color: var(--warning-color);
+}
+
+/* File cards */
+
+.file-card {
+	border-radius: var(--card-radius);
+	background: var(--card-bg-color);
+	box-shadow: 0 0 0 1px var(--card-shade-color), 0 1px 3px 1px alpha(black, 0.07);
+	transition: box-shadow 200ms var(--ease-out);
+}
+
+.file-card:hover {
+	box-shadow: 0 0 0 1px alpha(currentColor, 0.15), 0 2px 8px 1px alpha(black, 0.1);
+}
+
+.card-header {
+	padding: var(--spacing-snug) var(--spacing-small) var(--spacing-snug) var(--spacing-roomy);
+	min-height: 36px;
+}
+
+.file-card.expanded > .card-header {
+	border-bottom: 1px solid alpha(currentColor, 0.08);
+}
+
+.kind-badge.new {
+	background: alpha(var(--added), 0.18);
+	color: var(--added);
+}
+
+.kind-badge.removed {
+	background: alpha(var(--removed), 0.18);
+	color: var(--removed);
+}
+
+.kind-badge.moved {
+	background: alpha(currentColor, 0.1);
+	color: alpha(currentColor, 0.8);
+}
+
+.kind-badge.conflict {
+	background: alpha(var(--warning-color), 0.2);
+	color: var(--warning-color);
+}
+
+.stage-button {
+	min-height: 26px;
+	padding: 0 12px;
+	border-radius: var(--pill-radius);
+	font-weight: 700;
+	font-size: 0.9em;
+}
+
+.stage-button.unstaged {
+	background: alpha(var(--accent-bg-color), 0.16);
+	color: var(--accent-color);
+}
+
+.stage-button.unstaged:hover {
+	background: alpha(var(--accent-bg-color), 0.28);
+}
+
+/* Line counts and the kind of change share one small pill shape */
+
+
+.card-body {
+	padding-bottom: var(--spacing-snug);
+}
+
+.card-note {
+	padding: var(--spacing-roomy);
+	opacity: 0.6;
+}
+
+.hunk + .hunk {
+	border-top: 1px dashed alpha(currentColor, 0.1);
+}
+
+/* A hunk's caption starts where the card's header starts */
+.hunk-header {
+	padding: var(--spacing-tight) var(--spacing-small) var(--spacing-tight) var(--spacing-roomy);
+	font-size: 0.85em;
+}
+
+.hunk-range {
+	opacity: 0.55;
+	margin-right: var(--spacing-small);
+}
+
+.hunk-section {
+	opacity: 0.5;
+}
+
+/* A card's own buttons show while the pointer is over it or a button in it has focus, so the names and changes lead */
+.card-action {
+	opacity: 0;
+	transition: opacity 180ms var(--ease-out);
+}
+
+.file-card:hover .card-action,
+.card-action:focus-within,
+.card-action:focus-visible,
+.card-action:checked {
+	opacity: 1;
+}
+
+/* A hunk's own buttons only show while the pointer is over it, so long diffs stay calm */
+.hunk-action {
+	opacity: 0;
+	min-height: 24px;
+	padding: 0 10px;
+	transition: opacity 180ms var(--ease-out);
+}
+
+.hunk:hover .hunk-action,
+.hunk-action:focus-visible {
+	opacity: 1;
+}
+
+/* The code and its line numbers sit straight on the card */
+.diff-view,
+.diff-view text,
+.diff-view border,
+.diff-view gutter,
+.diff-view gutterrenderer {
+	background: transparent;
+}
+
+
+
+/* Room for four digits, so the old and new numbers never run together */
+/* Numbers are quiet through their colour, so the tint of a changed line behind them keeps its strength */
+.diff-view .line-number {
+	min-width: 3.4em;
+	color: alpha(currentColor, 0.45);
+}
+
+/* The gutter meets the code with no gap, so a changed line's tint runs unbroken */
+.diff-view gutter {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+/* The sign's column holds the space before the code, so that space takes the changed line's tint */
+.diff-view .sign {
+	min-width: 2.4em;
+}
+
+.picture-comparison {
+	padding: var(--spacing-roomy);
+}
+
+.picture-side picture {
+	border-radius: 8px;
+	background: alpha(currentColor, 0.04);
+}
+
+.conflict-actions {
+	padding: var(--spacing-snug) var(--spacing-normal) var(--spacing-normal);
+}
+
+.file-card.conflict {
+	box-shadow: 0 0 0 1px alpha(var(--warning-color), 0.45);
+}
+
+/* The commit box */
+
+.commit-box {
+	padding: var(--spacing-roomy);
+	border-radius: var(--card-radius);
+	background: var(--card-bg-color);
+	box-shadow: 0 0 0 1px var(--card-shade-color);
+}
+
+.commit-field {
+	border-radius: 10px;
+	background: alpha(currentColor, 0.1);
+	box-shadow: inset 0 0 0 1px alpha(var(--accent-color), 0.45);
+	transition: box-shadow 200ms var(--ease-out);
+}
+
+.commit-field:focus-within {
+	box-shadow: inset 0 0 0 2px alpha(var(--accent-color), 0.6);
+}
+
+.commit-message,
+.commit-message text {
+	background: transparent;
+}
+
+.commit-message {
+	padding: var(--spacing-snug) var(--spacing-normal);
+}
+
+.commit-placeholder {
+	opacity: 0.45;
+	margin: var(--spacing-snug) var(--spacing-normal);
+}
+
+.message-frame {
+	border-radius: 8px;
+	box-shadow: inset 0 0 0 1px alpha(currentColor, 0.15);
+}
+
+/* A commit's page */
+
+.commit-header {
+	padding: var(--spacing-large);
+	border-radius: var(--card-radius);
+	background: var(--card-bg-color);
+	box-shadow: 0 0 0 1px var(--card-shade-color);
+}
+
+.commit-subject {
+	font-size: 1.45em;
+	font-weight: 800;
+}
+
+.commit-body {
+	opacity: 0.85;
+}
+
+.hash-button {
+	font-size: 0.9em;
+	padding: 2px 10px;
+}
+
+.history-line {
+	padding: var(--spacing-snug) var(--spacing-normal);
+}
+
+/* Room for a name and an age, such as "Morgan Ashworth, 11 months ago" */
+.blame-view .blame-gutter {
+	min-width: 22em;
+	opacity: 0.85;
+}
+
+.git-output {
+	font-size: 0.85em;
+}
+
+/* A status page's content sits a little above the middle, where the eye takes the middle to be */
+statuspage.illustrated {
+	padding-bottom: 80px;
+}
+
+/* The check box's own box lines up with the message field above it */
+.commit-box checkbutton {
+	margin-left: -4px;
+}
+
+/* The list of files is a card of its own, with its icons on the same line as the icons of the cards below */
+.file-overview {
+	background: var(--card-bg-color);
+	border-radius: 12px;
+	padding: var(--spacing-tight) 0;
+}
+
+.file-overview > row {
+	border-radius: 8px;
+}
+
+.file-overview .overview-row {
+	min-height: 32px;
+	padding: 0 var(--spacing-small) 0 var(--spacing-roomy);
+}
+
+
+/* The choices for a folder without Git keep the shape of every other button, a touch larger and of one width */
+.setup-actions button {
+	min-width: 200px;
+	min-height: 36px;
+}
+
+/* A line longer than the card fades out at the side it scrolls to, rather than stopping hard at the edge. The card's
+ * colour can be see-through, so it is laid over the window's colour to end exactly on the card */
+.hunk > scrolledwindow undershoot.right {
+	background: linear-gradient(to left, var(--card-bg-color), transparent),
+		linear-gradient(to left, var(--window-bg-color), transparent);
+	min-width: var(--spacing-large);
+}
+
+.hunk > scrolledwindow undershoot.left {
+	background: linear-gradient(to right, var(--card-bg-color), transparent),
+		linear-gradient(to right, var(--window-bg-color), transparent);
+	min-width: var(--spacing-large);
+}
+
+/* A hunk keeps the card's inner gap on both sides, the same as the header and caption above it */
+.hunk > scrolledwindow {
+	margin: 0 var(--spacing-roomy);
+	border-radius: 6px;
+}
+
+/* A stash shows the same grey box in its header as in the list */
+.stash-mark {
+	border-radius: 9999px;
+	background: alpha(currentColor, 0.1);
+	color: alpha(currentColor, 0.8);
+}
+
+/* Every menu of three dots has one size */
+.branch-row .branch-more,
+.commit-header menubutton > button,
+.card-header menubutton > button {
+	min-width: 34px;
+	min-height: 34px;
+}
+
+/* A picture stays a little quieter than the changes around it */
+.picture-side picture {
+	opacity: 0.85;
+}
+
+/* Line counts in text keep the colours of added and removed lines, made lighter on dark and darker on light, so
+ * they read as easily as the text around them */
+.added-count {
+	color: mix(var(--added), black, 0.3);
+}
+
+.removed-count {
+	color: mix(var(--removed), black, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+	.added-count {
+		color: mix(var(--added), white, 0.3);
+	}
+
+	.removed-count {
+		color: mix(var(--removed), white, 0.35);
+	}
+}
+
+/* A list box gives its rows a little padding of their own, which would push the list off the cards' lines */
+.file-overview > row {
+	padding: 0;
+}
+
+/* A group of cards starts a little further from the lists above than parts sit from each other */
+.group-divider {
+	margin-top: var(--spacing-normal);
+}
+
+.group-divider .group-heading {
+	margin-top: 0;
+}
+
+/* The button back to the top keeps the page's large gap from the corner, clear of the scrollbar. Hidden, it waits a
+ * little lower and smaller, and rises, grows and fades in when shown, sinking away the same way */
+.top-button {
+	margin: var(--spacing-large);
+	min-width: 44px;
+	min-height: 44px;
+	opacity: 0;
+	transform: translateY(12px) scale(0.85);
+	transition: opacity 220ms var(--ease-out), transform 320ms var(--ease-out);
+}
+
+.top-button.shown {
+	opacity: 1;
+	transform: none;
+}
+
+/* A branch's own actions read as a short menu under its name */
+.branch-action {
+	padding: var(--spacing-snug) var(--spacing-normal);
+	font-weight: 400;
+}

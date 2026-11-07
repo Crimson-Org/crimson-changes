@@ -1,0 +1,82 @@
+// crimson-build writes each task as a .sh script for Linux and macOS in this folder, and those
+// scripts run anywhere without Crimson Build.
+{
+	"systems": ["unix"],
+	"env": {
+		"PROGRAM": "crimson-changes",
+		"APPLICATION_ID": "io.github.CrimsonOrg.CrimsonChanges",
+		"VERSION": "0.1.0",
+		"PREFIX": "${HOME}/.local",
+		"STD": "c11",
+		"WARN": "-Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter",
+		"OPT": "-O2 -g",
+		"GTK_MINOR": "16",
+		"ADWAITA_MINOR": "7",
+		"SOURCE_VIEW_MINOR": "12",
+		"PKGS": "gtk4 >= 4.${GTK_MINOR} libadwaita-1 >= 1.${ADWAITA_MINOR} gtksourceview-5 >= 5.${SOURCE_VIEW_MINOR}",
+		"LIBS": "-lm",
+		"DEFINES": "-DAPPLICATION_VERSION=\"${VERSION}\"",
+		"VERSION_CHECKS": "-DGDK_VERSION_MIN_REQUIRED=GDK_VERSION_4_${GTK_MINOR} -DGDK_VERSION_MAX_ALLOWED=GDK_VERSION_4_${GTK_MINOR} -DADW_VERSION_MIN_REQUIRED=ADW_VERSION_1_${ADWAITA_MINOR} -DADW_VERSION_MAX_ALLOWED=ADW_VERSION_1_${ADWAITA_MINOR} -DGTK_SOURCE_VERSION_MIN_REQUIRED=GTK_SOURCE_VERSION_5_${SOURCE_VIEW_MINOR} -DGTK_SOURCE_VERSION_MAX_ALLOWED=GTK_SOURCE_VERSION_5_${SOURCE_VIEW_MINOR}",
+		"INCLUDES": "-Isrc -Isubprojects/crimson-core/src",
+		"HEADERS": "src/*/*.h subprojects/crimson-core/src/*/*.h subprojects/crimson-core/src/*/*/*.h"
+	},
+	"tasks": {
+		"build": {
+			"description": "Build Crimson Changes into the project folder",
+			"steps": [
+				{"needs": ["cc", "pkg-config", "glib-compile-resources"]},
+				{"pkg": "${PKGS}"},
+				{"mkdir": ["build/obj"]},
+				"glib-compile-resources --sourcedir assets --target build/resources.c --generate-source assets/crimson-changes.gresource.xml",
+				"glib-compile-resources --sourcedir subprojects/crimson-core/assets --target build/core-resources.c --generate-source subprojects/crimson-core/assets/crimson-core.gresource.xml",
+				{"each": {"from": "src/*.c src/app/*.c src/git/*.c src/graph/*.c src/view/*.c src/window/*.c subprojects/crimson-core/src/common/*/*.c subprojects/crimson-core/src/source/*.c", "to": "build/obj/{id}.o", "run": "cc -std=${STD} $WARN $OPT $DEFINES $VERSION_CHECKS $INCLUDES $(pkg-config --cflags \"$PKGS\" | sed \"s/-I/-isystem /g\") -c {from} -o {to}", "also": "${HEADERS}"}},
+				{"each": {"from": "build/resources.c build/core-resources.c", "to": "build/obj/{id}.o", "run": "cc -std=gnu11 $OPT $(pkg-config --cflags gio-2.0) -c {from} -o {to}"}},
+				"cc -o build/${PROGRAM} build/obj/*.o $(pkg-config --libs \"$PKGS\") $LIBS",
+				{"copy": {"from": "build/${PROGRAM}", "to": ".${PROGRAM}.new"}},
+				{"move": {"from": ".${PROGRAM}.new", "to": "${PROGRAM}"}},
+				{"mkdir": ["logs"]}
+			]
+		},
+		"run": {
+			"description": "Build and start Crimson Changes",
+			"depends": "build",
+			"steps": [
+				"./${PROGRAM}"
+			]
+		},
+		"install": {
+			"description": "Install Crimson Changes for the current user",
+			"depends": "build",
+			"steps": [
+				"sh subprojects/crimson-core/scripts/install.sh"
+			]
+		},
+		"uninstall": {
+			"description": "Remove Crimson Changes from the current user",
+			"steps": [
+				"sh subprojects/crimson-core/scripts/uninstall.sh"
+			]
+		},
+		"archive": {
+			"description": "Pack Crimson Changes into a tar.gz archive in dist",
+			"depends": "build",
+			"steps": [
+				"sh subprojects/crimson-core/scripts/package.sh"
+			]
+		},
+		"appimage": {
+			"description": "Pack Crimson Changes into an AppImage in dist",
+			"depends": "build",
+			"steps": [
+				{"needs": ["quick-sharun"]},
+				"sh subprojects/crimson-core/scripts/appimage.sh"
+			]
+		},
+		"clean": {
+			"description": "Remove the build folder",
+			"steps": [
+				{"remove": "build"}
+			]
+		}
+	}
+}

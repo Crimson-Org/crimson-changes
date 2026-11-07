@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+	<gresource prefix="/io/github/CrimsonOrg/CrimsonChanges">
+		<file>style.css</file>
+		<file>schemes/crimson-changes-dark.xml</file>
+		<file>schemes/crimson-changes-light.xml</file>
+		<file>icons/scalable/actions/crimson-branch-symbolic.svg</file>
+		<file>icons/scalable/actions/crimson-pull-symbolic.svg</file>
+		<file>icons/scalable/actions/crimson-push-symbolic.svg</file>
+		<file>icons/scalable/actions/crimson-stash-symbolic.svg</file>
+		<file>icons/scalable/actions/crimson-sync-symbolic.svg</file>
+		<file>icons/scalable/actions/crimson-tag-symbolic.svg</file>
+		<file>icons/scalable/apps/io.github.CrimsonOrg.CrimsonChanges.svg</file>
+		<file>icons/scalable/status/crimson-all-committed.svg</file>
+		<file>icons/scalable/status/crimson-problem.svg</file>
+		<file>icons/scalable/status/crimson-start-tracking.svg</file>
+	</gresource>
+</gresources>

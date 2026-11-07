@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>io.github.CrimsonOrg.CrimsonChanges</id>
+	<name>Crimson Changes</name>
+	<summary>See what changed in a folder, now and before</summary>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>LicenseRef-proprietary</project_license>
+	<description>
+		<p>A viewer for Git repositories that shows the changes not yet saved as a commit, the recent history and every branch, and can stage, commit, restore and blame.</p>
+	</description>
+	<developer id="io.github.CrimsonOrg">
+		<name>Crimson</name>
+	</developer>
+	<releases>
+		<release version="0.1.0" date="2026-11-06"/>
+	</releases>
+	<launchable type="desktop-id">io.github.CrimsonOrg.CrimsonChanges.desktop</launchable>
+	<provides>
+		<binary>crimson-changes</binary>
+	</provides>
+	<content_rating type="oars-1.1"/>
+</component>

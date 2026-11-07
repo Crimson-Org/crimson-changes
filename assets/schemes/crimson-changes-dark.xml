@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Adwaita's dark code colours on the same colour as the card the code sits in -->
+<style-scheme id="crimson-changes-dark" name="Crimson Changes Dark" version="1.0" parent-scheme="Adwaita-dark">
+	<style name="text" foreground="#deddda" background="#333337"/>
+	<style name="line-numbers" foreground="#77767b" background="#333337"/>
+</style-scheme>

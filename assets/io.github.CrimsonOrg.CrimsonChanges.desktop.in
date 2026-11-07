@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Crimson Changes
+Comment=See what changed in a folder, now and before
+Exec=@EXEC@ %U
+Icon=io.github.CrimsonOrg.CrimsonChanges
+Terminal=false
+Categories=Development;RevisionControl;GTK;
+Keywords=git;history;changes;diff;commit;blame;branch;version;
+StartupNotify=true

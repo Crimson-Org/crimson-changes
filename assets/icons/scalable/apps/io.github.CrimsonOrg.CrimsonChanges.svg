@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+	<defs>
+		<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#1f080c"/>
+			<stop offset="1" stop-color="#070203"/>
+		</linearGradient>
+		<radialGradient id="heart" cx="0.5" cy="0.42" r="0.5">
+			<stop offset="0" stop-color="#c8102e" stop-opacity="0.32"/>
+			<stop offset="1" stop-color="#c8102e" stop-opacity="0"/>
+		</radialGradient>
+		<linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#ff4d5e" stop-opacity="0.16"/>
+			<stop offset="0.5" stop-color="#ff4d5e" stop-opacity="0"/>
+		</linearGradient>
+		<linearGradient id="blood" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#ff4057"/>
+			<stop offset="0.55" stop-color="#d4112b"/>
+			<stop offset="1" stop-color="#8e0a1d"/>
+		</linearGradient>
+		<filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+			<feGaussianBlur stdDeviation="2.5"/>
+		</filter>
+		<filter id="bloom" x="-80%" y="-80%" width="260%" height="260%">
+			<feGaussianBlur stdDeviation="7"/>
+		</filter>
+	</defs>
+	<rect x="12" y="12" width="104" height="104" rx="22" fill="url(#panel)"/>
+	<rect x="12" y="12" width="104" height="104" rx="22" fill="url(#heart)"/>
+	<rect x="12" y="12" width="104" height="104" rx="22" fill="url(#sheen)" stroke="#c8102e" stroke-opacity="0.75" stroke-width="2" stroke-linejoin="round"/>
+	<path d="M88 22V80" fill="none" stroke="#4a161e" stroke-width="4" stroke-linecap="round"/>
+	<path d="M88 72C102 72 102 64 102 56V46C102 38 102 30 88 30" fill="none" stroke="#ff4d5e" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round"/>
+	<circle cx="88" cy="30" r="5" fill="#1a0609" stroke="#e3132f" stroke-width="2.5"/>
+	<circle cx="88" cy="52" r="4" fill="#1a0609" stroke="#4a161e" stroke-width="2.5"/>
+	<circle cx="102" cy="51" r="4" fill="#1a0609" stroke="#ff4d5e" stroke-width="2.5"/>
+	<circle cx="88" cy="74" r="5" fill="#1a0609" stroke="#e3132f" stroke-width="2.5"/>
+	<path d="M44.81 24Q47.97 24 50.21 24.16Q52.45 24.32 54.32 24.64Q56.19 24.97 58.18 25.51L57.38 32.76Q55.28 32.63 53.49 32.57Q51.7 32.51 49.68 32.45Q47.65 32.41 44.81 32.41Q41.56 32.41 39.71 33.71Q37.85 35.02 37.1 38.19Q36.34 41.36 36.34 47Q36.34 52.64 37.1 55.81Q37.85 58.98 39.71 60.29Q41.56 61.59 44.81 61.59Q49.29 61.59 52.32 61.46Q55.35 61.33 58.31 60.98L59.12 68.2Q56.06 69.16 52.83 69.58Q49.61 70 44.81 70Q37.95 70 33.81 67.78Q29.67 65.56 27.84 60.53Q26 55.51 26 47Q26 38.49 27.84 33.47Q29.67 28.44 33.81 26.22Q37.95 24 44.81 24Z" fill="#c8102e" fill-opacity="0.8" filter="url(#bloom)"/>
+	<path d="M44.81 24Q47.97 24 50.21 24.16Q52.45 24.32 54.32 24.64Q56.19 24.97 58.18 25.51L57.38 32.76Q55.28 32.63 53.49 32.57Q51.7 32.51 49.68 32.45Q47.65 32.41 44.81 32.41Q41.56 32.41 39.71 33.71Q37.85 35.02 37.1 38.19Q36.34 41.36 36.34 47Q36.34 52.64 37.1 55.81Q37.85 58.98 39.71 60.29Q41.56 61.59 44.81 61.59Q49.29 61.59 52.32 61.46Q55.35 61.33 58.31 60.98L59.12 68.2Q56.06 69.16 52.83 69.58Q49.61 70 44.81 70Q37.95 70 33.81 67.78Q29.67 65.56 27.84 60.53Q26 55.51 26 47Q26 38.49 27.84 33.47Q29.67 28.44 33.81 26.22Q37.95 24 44.81 24Z" fill="#e3132f" fill-opacity="0.8" filter="url(#glow)"/>
+	<path d="M44.81 24Q47.97 24 50.21 24.16Q52.45 24.32 54.32 24.64Q56.19 24.97 58.18 25.51L57.38 32.76Q55.28 32.63 53.49 32.57Q51.7 32.51 49.68 32.45Q47.65 32.41 44.81 32.41Q41.56 32.41 39.71 33.71Q37.85 35.02 37.1 38.19Q36.34 41.36 36.34 47Q36.34 52.64 37.1 55.81Q37.85 58.98 39.71 60.29Q41.56 61.59 44.81 61.59Q49.29 61.59 52.32 61.46Q55.35 61.33 58.31 60.98L59.12 68.2Q56.06 69.16 52.83 69.58Q49.61 70 44.81 70Q37.95 70 33.81 67.78Q29.67 65.56 27.84 60.53Q26 55.51 26 47Q26 38.49 27.84 33.47Q29.67 28.44 33.81 26.22Q37.95 24 44.81 24Z" fill="url(#blood)" stroke="#ff5a6c" stroke-opacity="0.35" stroke-width="0.6"/>
+	<rect x="30" y="86" width="68" height="26" rx="3" fill="#c8102e" fill-opacity="0.18" stroke="#c8102e" stroke-width="1.5"/>
+	<path d="M43 97h5v-5h4v5h5v4h-5v5h-4v-5h-5zM71 97h14v4H71z" fill="#ffd0d6"/>
+</svg>

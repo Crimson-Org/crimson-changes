@@ -1,0 +1,9 @@
+/* Start the Crimson Changes repository viewer
+ *
+ */
+
+#include "app/application.h"
+
+int main(int argument_count, char **arguments) {
+	return run_application(&APPLICATION_SETUP, argument_count, arguments);
+}
