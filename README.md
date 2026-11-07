@@ -28,9 +28,8 @@ Open a folder to see your changes, the history and every branch.</p>
 
 ## Why
 
-Most Git apps are large and made for people who already know Git well.\
-Crimson Changes starts small: what you changed now, and what changed before.\
-Staging, branches, blame and the rest are there when you need them.
+Crimson Changes shows your current and past changes.\
+Staging, branches and blame are there when you need them.
 
 ## About
 
