@@ -66,7 +66,7 @@ void apply_settings(void) {
 			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 	}
 	g_autofree char *css = g_strdup_printf(".code { font-size: calc(var(--monospace-font-size) * %d / %d); }",
-		current->code_size, PERCENT);
+		current->code_size * CODE_SIZE_BASE, PERCENT * PERCENT);
 	gtk_css_provider_load_from_string(style, css);
 	for (guint index = 0; listeners && index < listeners->len; index++) {
 		Listener *listener = &g_array_index(listeners, Listener, index);

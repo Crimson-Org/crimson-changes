@@ -5,11 +5,13 @@
 #define MINIMUM_TEXT_SIZE 50
 #define MAXIMUM_TEXT_SIZE 300
 #define DEFAULT_TEXT_SIZE 100
+/* The share of the system monospace font that a code size of 100% stands for, since the full size reads large */
+#define CODE_SIZE_BASE 85
 #define MAXIMUM_CONTEXT_LINES 20
 
 /* Choices made in Settings, kept between launches */
 typedef struct {
-	/* The size of the code in diffs and blame, as a percentage of the system monospace font */
+	/* The size of the code in diffs and blame, as a percentage of CODE_SIZE_BASE */
 	int code_size;
 	gboolean wraps_lines;
 	gboolean ignores_whitespace;
