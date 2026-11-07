@@ -22,6 +22,10 @@ Open a folder to see your changes, the history and every branch.</p>
   <a href="https://github.com/Crimson-Org/crimson-changes/releases/latest"><b>Download Here!</b></a>
 </p>
 
+<p align="center">
+  <img src="./demo1.png" alt="Crimson Changes showing a garden planner's changes and history">
+</p>
+
 ## Why
 
 Most Git apps are large and made for people who already know Git well.\
