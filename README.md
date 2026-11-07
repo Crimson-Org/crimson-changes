@@ -3,8 +3,8 @@
 </p>
 
 <h1 align="center">Crimson Changes</h1>
-<p align="center">A Linux app that shows what changed in a Git folder, now and before.<br>
-Open a folder to see your changes, the history and every branch.</p>
+<p align="center">A <a href="https://git-scm.com/">Git</a> repository diff and history viewer for Linux.<br>
+Explore changes in your Git repository, past and present.</p>
 
 <p align="center">
   <a href="https://gtk.org">
@@ -28,7 +28,7 @@ Open a folder to see your changes, the history and every branch.</p>
 
 ## Why
 
-Crimson Changes shows your current and past changes.\
+See what changed in a folder at a glance, without learning Git commands.\
 Staging, branches and blame are there when you need them.
 
 ## About
